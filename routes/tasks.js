@@ -1,22 +1,16 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
+const auth = require("../middlewares/auth");
 const { Task } = require("../models/task");
-// const auth = require("../middlewares/auth");
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   const queryObj = {};
 
   const tasks = await Task.find(queryObj);
   res.send(tasks);
 });
 
-// router.get("/secured", auth, async (req, res) => {
-//   const tasks = await Task.find({ email: req.user.email });
-//   res.send(tasks);
-// });
-
-// router.post("/", auth, async (req, res) => {
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   const bodyCopy = req.body;
 
   const task = new Task({
@@ -29,7 +23,16 @@ router.post("/", async (req, res) => {
   res.send(task);
 });
 
-router.delete("/:id", async (req, res) => {
+router.patch("/:id", auth, async (req, res) => {
+  const id = req.params.id;
+  const task = await Task.findByIdAndUpdate(
+    mongoose.Types.ObjectId(id),
+    req.body
+  );
+  res.send(task);
+});
+
+router.delete("/:id", auth, async (req, res) => {
   const id = req.params.id;
   const task = await Task.findByIdAndDelete(mongoose.Types.ObjectId(id));
   res.send(task);

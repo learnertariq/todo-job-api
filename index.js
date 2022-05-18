@@ -4,6 +4,7 @@ require("express-async-errors");
 
 const rootRouter = require("./routes/root");
 const tasksRouter = require("./routes/tasks");
+const loginRouter = require("./routes/login");
 
 // import middlewares
 const errorsMiddleware = require("./middlewares/errors");
@@ -43,6 +44,7 @@ app.use(express.urlencoded({ extended: false }));
 // routes
 app.use("/", rootRouter);
 app.use("/tasks", tasksRouter);
+app.use("/login", loginRouter);
 
 app.use(errorsMiddleware);
 

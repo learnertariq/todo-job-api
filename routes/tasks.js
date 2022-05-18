@@ -4,7 +4,7 @@ const auth = require("../middlewares/auth");
 const { Task } = require("../models/task");
 
 router.get("/", auth, async (req, res) => {
-  const queryObj = {};
+  const queryObj = { email: req?.user?.email };
 
   const tasks = await Task.find(queryObj);
   res.send(tasks);

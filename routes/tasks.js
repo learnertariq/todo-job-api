@@ -22,6 +22,7 @@ router.post("/", async (req, res) => {
   const task = new Task({
     name: bodyCopy.name,
     desc: bodyCopy.desc,
+    complete: bodyCopy.complete || false,
   });
 
   await task.save();

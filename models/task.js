@@ -13,6 +13,10 @@ const taskSchema = new mongoose.Schema({
     minLength: 0,
     maxLength: 1000,
   },
+  complete: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = {

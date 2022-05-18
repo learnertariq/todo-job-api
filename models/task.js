@@ -7,6 +7,12 @@ const taskSchema = new mongoose.Schema({
     minLength: 0,
     maxLength: 100,
   },
+  email: {
+    type: String,
+    required: true,
+    minLength: 0,
+    maxLength: 100,
+  },
   desc: {
     type: String,
     required: true,

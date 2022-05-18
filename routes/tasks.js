@@ -4,7 +4,7 @@ const auth = require("../middlewares/auth");
 const { Task } = require("../models/task");
 
 router.get("/", auth, async (req, res) => {
-  const queryObj = { email: req?.user?.email };
+  const queryObj = { email: req.user?.email };
 
   const tasks = await Task.find(queryObj);
   res.send(tasks);
@@ -15,6 +15,7 @@ router.post("/", auth, async (req, res) => {
 
   const task = new Task({
     name: bodyCopy.name,
+    email: req.user?.email,
     desc: bodyCopy.desc,
     complete: bodyCopy.complete || false,
   });

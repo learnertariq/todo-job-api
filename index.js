@@ -3,8 +3,7 @@ const mongoose = require("mongoose");
 require("express-async-errors");
 
 const rootRouter = require("./routes/root");
-const tasksRouter = require("./routes/fruits");
-const loginRouter = require("./routes/login");
+const tasksRouter = require("./routes/tasks");
 
 // import middlewares
 const errorsMiddleware = require("./middlewares/errors");
@@ -16,7 +15,7 @@ if (app.get("env") !== "production") {
 
 // Connecting to database
 mongoose.connect(
-  `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.lzyhs.mongodb.net/fruits-stock?retryWrites=true&w=majority`,
+  `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ukqm0.mongodb.net/?retryWrites=true&w=majority`,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -43,7 +42,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // routes
 app.use("/", rootRouter);
-app.use("/task", tasksRouter);
+app.use("/tasks", tasksRouter);
 
 app.use(errorsMiddleware);
 
